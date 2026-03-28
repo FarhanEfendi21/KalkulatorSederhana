@@ -1,12 +1,12 @@
 :root {
     --primary: #2563eb;
-    --background: #ffffff;
+    --background: #fcfcfc;
     --surface: #ffffff;
     --text-main: #1e293b;
     --text-secondary: #64748b;
-    --border: #f1f5f9;
+    --border: #e2e8f0;
     --button-number: #ffffff;
-    --button-operator: #f8fafc;
+    --button-operator: #f1f5f9;
     --button-action: #2563eb;
 }
 
@@ -15,182 +15,297 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     background-color: var(--background);
     color: var(--text-main);
-    height: 100dvh;
-    overflow: hidden;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* Remove old glow effect */
+.background-glow {
+    display: none;
 }
 
 .calculator-container {
-    height: 100%;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    max-width: 480px;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-}
-
-/* Header / Top Bar */
-.top-bar {
-    padding: 1rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
+    gap: 2rem;
     align-items: center;
+    max-width: 420px;
+    width: 100%;
 }
 
-.app-title {
-    font-size: 1.1rem;
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-main);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.25rem;
 }
 
-.menu-container {
-    position: relative;
-}
-
-.icon-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
+header p {
     color: var(--text-secondary);
-    cursor: pointer;
-    padding: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.calculator-glass {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2.5rem;
+    padding: 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    width: 100%;
+}
+
+.main-nav {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
     transition: color 0.2s;
 }
 
-.icon-btn:hover {
-    color: var(--text-main);
+.nav-link:hover {
+    color: var(--primary);
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    border-radius: 1rem;
-    padding: 0.5rem;
-    display: none;
-    z-index: 100;
-    min-width: 180px;
-    border: 1px solid var(--border);
-}
-
-.dropdown-menu.active {
-    display: block;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    color: var(--text-main);
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 0.75rem;
-    transition: background 0.2s;
-}
-
-.dropdown-menu a:hover {
-    background: var(--button-operator);
-}
-
-/* Display Area */
 .display {
-    flex: 1;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 0.5rem;
+    margin-bottom: 1.5rem;
+    min-height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    text-align: right;
-    word-break: break-all;
+    border-bottom: 1px solid var(--border);
 }
 
 .previous-operand {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
+    font-size: 1.1rem;
     font-weight: 500;
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
     min-height: 1.5rem;
 }
 
 .current-operand {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: var(--text-main);
-    letter-spacing: -1.5px;
-    line-height: 1.1;
+    letter-spacing: -1px;
 }
 
-/* Keypad Area */
-.keypad {
+.buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border); /* Divider effect */
-    padding: 1px;
+    gap: 0.75rem;
 }
 
-.keypad button {
-    height: 18dvh; /* Dynamic height to fill bottom half */
-    max-height: 100px;
+button {
+    height: 72px;
+    border-radius: 1.25rem;
+    border: 1px solid transparent;
     background: var(--button-number);
-    border: none;
-    font-size: 1.6rem;
-    font-weight: 600;
     color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 600;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.keypad button:active {
-    background: #f1f5f9;
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background: #f8fafc;
 }
 
-.keypad .control {
+button:active {
+    transform: translateY(0);
+}
+
+.control {
+    background: var(--button-operator);
+    color: var(--text-secondary);
+}
+
+.operator {
     background: var(--button-operator);
     color: var(--primary);
 }
 
-.keypad .operator {
-    background: var(--button-operator);
-    color: var(--primary);
+.operator-equal {
+    background: var(--button-action);
+    color: #ffffff;
+    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
 }
 
-.keypad .operator-equal {
-    background: var(--primary);
-    color: white;
-}
-
-.keypad .operator-equal:active {
+.operator-equal:hover {
     background: #1d4ed8;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
 }
 
-/* UI Polishing */
-.background-glow {
-    display: none; /* Keep it clean */
+.span-two {
+    grid-column: span 2;
 }
 
-/* Mobile Tweak */
-@media (max-height: 700px) {
+footer {
+    opacity: 0.8;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Mobile Adjustments */
+/* Mobile Adjustments (Full Screen Experience) */
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+        align-items: flex-start;
+        display: block;
+        /* Let it scroll naturally */
+    }
+
+    .calculator-container {
+        padding: 0;
+        gap: 0;
+        max-width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        padding: 1.5rem 1rem 1rem;
+        background: var(--background);
+    }
+
+    .calculator-glass {
+        padding: 1.5rem;
+        border-radius: 2rem 2rem 0 0;
+        border: none;
+        border-top: 1px solid var(--border);
+        box-shadow: none;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .display {
+        padding: 1.5rem 0.5rem;
+        min-height: 120px;
+        margin-bottom: 2rem;
+    }
+
     .current-operand {
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
-    .keypad button {
-        height: 15dvh;
+
+    button {
+        height: 72px;
+        font-size: 1.5rem;
     }
+
+    .main-nav {
+        margin-bottom: 2rem;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+        background: #ffffff;
+        width: 100%;
+        border-top: 1px solid var(--border);
+    }
+
+    /* History & About adjustments for full screen mobile */
+    .about-content,
+    .history-list {
+        padding: 0 1rem;
+    }
+
+    .history-item {
+        margin-bottom: 0.5rem;
+        border-radius: 1rem;
+    }
+}
+
+/* Specialized styles for about & history pages */
+.about-content h2 {
+    color: var(--text-main);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.about-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--button-operator);
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    background: var(--border);
+}
+
+.history-item {
+    background: var(--button-operator);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border);
+}
+
+.history-expr {
+    font-weight: 500;
+}
+
+.history-res {
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.clear-btn {
+    height: 50px;
+    background: #fef2f2;
+    color: #ef4444;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+.clear-btn:hover {
+    background: #fee2e2;
 }

@@ -32,52 +32,49 @@
 <body>
     <div class="background-glow"></div>
     <main class="calculator-container">
-        <header class="top-bar">
-            <span class="app-title">Calculator</span>
-            <div class="menu-container">
-                <button id="menu-toggle" class="icon-btn">⋮</button>
-                <div id="dropdown-menu" class="dropdown-menu">
-                    <a href="history.html">Riwayat</a>
-                    <a href="about.html">Informasi & Panduan</a>
-                </div>
-            </div>
+        <header>
+            <h1>Calculator</h1>
+            <p>Simple tools for learning GitHub</p>
         </header>
 
-        <section class="display">
-            <div id="previous-operand" class="previous-operand"></div>
-            <div id="current-operand" class="current-operand">0</div>
+        <section class="calculator-glass">
+            <nav class="main-nav">
+                <a href="history.html" class="nav-link">Riwayat </a>
+                <a href="about.html" class="nav-link">Informasi & Panduan</a>
+            </nav>
+            <div class="display">
+                <div id="previous-operand" class="previous-operand"></div>
+                <div id="current-operand" class="current-operand">0</div>
+            </div>
+            <div class="buttons">
+                <button data-all-clear class="span-two control">AC</button>
+                <button data-delete class="control">DEL</button>
+                <button data-operation class="operator">÷</button>
+
+                <button data-number>7</button>
+                <button data-number>8</button>
+                <button data-number>9</button>
+                <button data-operation class="operator">×</button>
+
+                <button data-number>4</button>
+                <button data-number>5</button>
+                <button data-number>6</button>
+                <button data-operation class="operator">+</button>
+
+                <button data-number>1</button>
+                <button data-number>2</button>
+                <button data-number>3</button>
+                <button data-operation class="operator">−</button>
+
+                <button data-number class="span-two">0</button>
+                <button data-number>.</button>
+                <button data-equals class="operator-equal">=</button>
+            </div>
         </section>
 
-        <section class="keypad">
-            <button data-all-clear class="control">AC</button>
-            <button data-delete class="control">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
-            </button>
-            <button data-operation class="control">%</button>
-            <button data-operation class="operator">÷</button>
-            
-            <button data-number>7</button>
-            <button data-number>8</button>
-            <button data-number>9</button>
-            <button data-operation class="operator">×</button>
-            
-            <button data-number>4</button>
-            <button data-number>5</button>
-            <button data-number>6</button>
-            <button data-operation class="operator">-</button>
-            
-            <button data-number>1</button>
-            <button data-number>2</button>
-            <button data-number>3</button>
-            <button data-operation class="operator">+</button>
-            
-            <button data-switch class="control">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>
-            </button>
-            <button data-number>0</button>
-            <button data-number>.</button>
-            <button data-equals class="operator-equal">=</button>
-        </section>
+        <footer>
+            <p>Ready to push to GitHub? 🚀</p>
+        </footer>
     </main>
     <script src="script.js"></script>
 </body>
