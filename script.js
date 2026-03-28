@@ -52,88 +52,50 @@ class Calculator {
         const current = parseFloat(this.currentOperand);
         if (isNaN(prev) || isNaN(current)) return;
         switch (this.operation) {
-            case '+':
-                computation = prev + current;
-                break;
-            case '−':
-                computation = prev - current;
-                break;
-            case '×':
-                computation = prev * current;
-                break;
-            case '÷':
-                computation = prev / current;
-                break;
-            case 'power':
-                computation = Math.pow(prev, current);
-                break;
-            default:
-                return;
+            case '+': computation = prev + current; break;
+            case '−': computation = prev - current; break;
+            case '×': computation = prev * current; break;
+            case '÷': computation = prev / current; break;
+            case 'power': computation = Math.pow(prev, current); break;
+            default: return;
         }
         const expression = `${this.getDisplayNumber(prev)} ${this.operation === 'power' ? '^' : this.operation} ${this.getDisplayNumber(current)}`;
         this.currentOperand = computation;
         this.operation = undefined;
         this.previousOperand = '';
         this.shouldResetScreen = true;
-
         this.saveToHistory(expression, this.getDisplayNumber(computation));
     }
 
-    // Advanced Operations
     advancedCompute(type) {
         const current = parseFloat(this.currentOperand);
-        if (isNaN(current) && type !== 'phi') return;
+        if (isNaN(current) && !['phi', 'e'].includes(type)) return;
         
         let result;
         let expression = '';
         const angleValue = this.isDeg ? (current * Math.PI) / 180 : current;
 
         switch (type) {
-            case 'sin':
-                result = Math.sin(angleValue);
-                expression = `sin(${current})`;
-                break;
-            case 'cos':
-                result = Math.cos(angleValue);
-                expression = `cos(${current})`;
-                break;
-            case 'tan':
-                result = Math.tan(angleValue);
-                expression = `tan(${current})`;
-                break;
-            case 'lg':
-                result = Math.log10(current);
-                expression = `log(${current})`;
-                break;
-            case 'ln':
-                result = Math.log(current);
-                expression = `ln(${current})`;
-                break;
-            case 'sqrt':
-                result = Math.sqrt(current);
-                expression = `√(${current})`;
-                break;
-            case 'inv':
-                result = 1 / current;
-                expression = `1/(${current})`;
-                break;
-            case 'phi':
-                result = 1.61803398875;
-                expression = 'φ';
-                this.currentOperand = result.toString();
-                this.updateDisplay();
-                return;
-            case 'fact':
-                result = this.factorial(current);
-                expression = `${current}!`;
-                break;
-            default:
-                return;
+            case 'sin': result = Math.sin(angleValue); expression = `sin(${current})`; break;
+            case 'cos': result = Math.cos(angleValue); expression = `cos(${current})`; break;
+            case 'tan': result = Math.tan(angleValue); expression = `tan(${current})`; break;
+            case 'lg': result = Math.log10(current); expression = `log(${current})`; break;
+            case 'ln': result = Math.log(current); expression = `ln(${current})`; break;
+            case 'sqrt': result = Math.sqrt(current); expression = `√(${current})`; break;
+            case 'inv': result = 1 / current; expression = `1/(${current})`; break;
+            case 'phi': result = 1.61803398875; expression = 'φ'; break;
+            case 'e': result = Math.E; expression = 'e'; break;
+            case 'fact': result = this.factorial(current); expression = `${current}!`; break;
+            default: return;
         }
 
-        this.saveToHistory(expression, this.getDisplayNumber(result));
-        this.currentOperand = result.toString();
-        this.shouldResetScreen = true;
+        if (['phi', 'e'].includes(type)) {
+            this.currentOperand = result.toString();
+        } else {
+            this.saveToHistory(expression, this.getDisplayNumber(result));
+            this.currentOperand = result.toString();
+            this.shouldResetScreen = true;
+        }
         this.updateDisplay();
     }
 
@@ -157,161 +119,89 @@ class Calculator {
         const stringNumber = number.toString();
         const integerDigits = parseFloat(stringNumber.split('.')[0]);
         const decimalDigits = stringNumber.split('.')[1];
-        let integerDisplay;
-        if (isNaN(integerDigits)) {
-            integerDisplay = '';
-        } else {
-            integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 });
-        }
-        if (decimalDigits != null) {
-            return `${integerDisplay}.${decimalDigits}`;
-        } else {
-            return integerDisplay;
-        }
+        let integerDisplay = isNaN(integerDigits) ? '' : integerDigits.toLocaleString('en', { maximumFractionDigits: 0 });
+        return decimalDigits != null ? `${integerDisplay}.${decimalDigits}` : integerDisplay;
     }
 
     updateDisplay() {
         this.currentOperandElement.innerText = this.getDisplayNumber(this.currentOperand);
         if (this.operation != null) {
-            let opSymbol = this.operation;
-            if (opSymbol === 'power') opSymbol = '^';
+            let opSymbol = this.operation === 'power' ? '^' : this.operation;
             this.previousOperandElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${opSymbol}`;
         } else {
             this.previousOperandElement.innerText = '';
         }
     }
 
-    vibrate() {
-        if ('vibrate' in navigator) {
-            navigator.vibrate(10);
-        }
-    }
+    vibrate() { if ('vibrate' in navigator) navigator.vibrate(10); }
 }
 
-// Select Elements
-const numberButtons = document.querySelectorAll('[data-number]');
-const operationButtons = document.querySelectorAll('[data-operation]');
-const advancedButtons = document.querySelectorAll('[data-advanced]');
-const equalsButton = document.querySelector('[data-equals]');
-const deleteButton = document.querySelector('[data-delete]');
-const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandElement = document.getElementById('previous-operand');
 const currentOperandElement = document.getElementById('current-operand');
+const buttonsGrid = document.getElementById('buttons-grid');
+const advancedToggle = document.getElementById('advanced-toggle');
 const themeToggle = document.getElementById('theme-toggle');
 const splashScreen = document.getElementById('splash-screen');
-const advancedToggle = document.getElementById('advanced-toggle');
-const advancedPanel = document.getElementById('advanced-panel');
-const modeToggle = document.getElementById('mode-toggle');
 
 const calculator = new Calculator(previousOperandElement, currentOperandElement);
 
-// Toggle Advanced Panel
+// Toggle Advanced
 advancedToggle.addEventListener('click', () => {
     calculator.vibrate();
-    advancedPanel.classList.toggle('open');
+    buttonsGrid.classList.toggle('advanced-active');
 });
 
-// Advanced Buttons Logic
-advancedButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.vibrate();
-        const type = button.dataset.advanced;
+// Event Delegation for Buttons
+buttonsGrid.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    calculator.vibrate();
+
+    if (btn.hasAttribute('data-number')) {
+        calculator.appendNumber(btn.innerText);
+    } else if (btn.hasAttribute('data-operation')) {
+        calculator.chooseOperation(btn.getAttribute('data-operation'));
+    } else if (btn.hasAttribute('data-advanced')) {
+        const type = btn.getAttribute('data-advanced');
         if (type === 'deg') {
             calculator.isDeg = !calculator.isDeg;
-            button.innerText = calculator.isDeg ? 'deg' : 'rad';
+            btn.innerText = calculator.isDeg ? 'deg' : 'rad';
         } else if (type === 'power') {
             calculator.chooseOperation('power');
-        } else if (['sin', 'cos', 'tan', 'lg', 'ln', 'sqrt', 'fact', 'inv', 'phi'].includes(type)) {
-            calculator.advancedCompute(type);
-        } else {
-            // Brackets - For simplicity in vanilla, we just append
+        } else if (['(', ')'].includes(type)) {
             calculator.appendNumber(type);
+        } else {
+            calculator.advancedCompute(type);
         }
-        calculator.updateDisplay();
-    });
+    } else if (btn.hasAttribute('data-all-clear')) {
+        calculator.clear();
+    } else if (btn.hasAttribute('data-delete')) {
+        calculator.delete();
+    } else if (btn.hasAttribute('data-equals')) {
+        calculator.compute();
+    }
+    calculator.updateDisplay();
 });
 
-// Splash Screen Logic (Session-based)
+// Splash Screen
 const hasShownSplash = sessionStorage.getItem('splash_shown');
 if (hasShownSplash) {
     splashScreen.style.display = 'none';
-    document.body.style.overflow = 'auto';
 } else {
     window.addEventListener('load', () => {
         setTimeout(() => {
             splashScreen.classList.add('fade-out');
             sessionStorage.setItem('splash_shown', 'true');
-            document.body.style.overflow = 'auto';
         }, 800);
     });
 }
 
-// Calculator Listeners
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.vibrate();
-        calculator.appendNumber(button.innerText);
-        calculator.updateDisplay();
-    });
-});
-
-operationButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.vibrate();
-        calculator.chooseOperation(button.getAttribute('data-operation') || button.innerText);
-        calculator.updateDisplay();
-    });
-});
-
-equalsButton.addEventListener('click', () => {
-    calculator.vibrate();
-    calculator.compute();
-    calculator.updateDisplay();
-});
-
-allClearButton.addEventListener('click', () => {
-    calculator.vibrate();
-    calculator.clear();
-    calculator.updateDisplay();
-});
-
-deleteButton.addEventListener('click', () => {
-    calculator.vibrate();
-    calculator.delete();
-    calculator.updateDisplay();
-});
-
-// Theme Management
-const enableDarkMode = () => {
-    document.body.classList.add('dark-mode');
-    localStorage.setItem('theme', 'dark');
+// Theme
+const applyTheme = (theme) => {
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+    localStorage.setItem('theme', theme);
 };
-const disableDarkMode = () => {
-    document.body.classList.remove('dark-mode');
-    localStorage.setItem('theme', 'light');
-};
-const savedTheme = localStorage.getItem('theme');
-const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-if (savedTheme === 'dark' || (!savedTheme && systemDarkMode)) enableDarkMode();
+if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) applyTheme('dark');
+themeToggle.addEventListener('click', () => applyTheme(document.body.classList.contains('dark-mode') ? 'light' : 'dark'));
 
-themeToggle.addEventListener('click', () => {
-    calculator.vibrate();
-    document.body.classList.contains('dark-mode') ? disableDarkMode() : enableDarkMode();
-});
-
-// Prevent pull-to-refresh
 document.body.style.overscrollBehaviorY = 'contain';
-
-// Keyboard accessibility
-window.addEventListener('keydown', e => {
-    if ((e.key >= 0 && e.key <= 9) || e.key === '.') calculator.appendNumber(e.key);
-    if (e.key === 'Enter' || e.key === '=') calculator.compute();
-    if (e.key === 'Backspace') calculator.delete();
-    if (e.key === 'Escape') calculator.clear();
-    if (e.key === '+') calculator.chooseOperation('+');
-    if (e.key === '-') calculator.chooseOperation('−');
-    if (e.key === '*') calculator.chooseOperation('×');
-    if (e.key === '/') calculator.chooseOperation('÷');
-    if (e.key === '%') calculator.chooseOperation('%');
-    calculator.updateDisplay();
-});
