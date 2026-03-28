@@ -99,8 +99,16 @@ class Calculator {
             this.previousOperandElement.innerText = '';
         }
     }
+
+    // Add haptic feedback for better PWA experience
+    vibrate() {
+        if ('vibrate' in navigator) {
+            navigator.vibrate(10);
+        }
+    }
 }
 
+// Select Elements
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
 const equalsButton = document.querySelector('[data-equals]');
@@ -108,11 +116,24 @@ const deleteButton = document.querySelector('[data-delete]');
 const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandElement = document.getElementById('previous-operand');
 const currentOperandElement = document.getElementById('current-operand');
+const themeToggle = document.getElementById('theme-toggle');
+const splashScreen = document.getElementById('splash-screen');
 
 const calculator = new Calculator(previousOperandElement, currentOperandElement);
 
+// Splash Screen Logic
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        splashScreen.classList.add('fade-out');
+        // Re-enable scroll if needed
+        document.body.style.overflow = 'auto';
+    }, 600);
+});
+
+// Calculator Logic Listeners
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
+        calculator.vibrate();
         calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
     });
@@ -120,27 +141,62 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
+        calculator.vibrate();
         calculator.chooseOperation(button.innerText);
         calculator.updateDisplay();
     });
 });
 
 equalsButton.addEventListener('click', button => {
+    calculator.vibrate();
     calculator.compute();
     calculator.updateDisplay();
 });
 
 allClearButton.addEventListener('click', button => {
+    calculator.vibrate();
     calculator.clear();
     calculator.updateDisplay();
 });
 
 deleteButton.addEventListener('click', button => {
+    calculator.vibrate();
     calculator.delete();
     calculator.updateDisplay();
 });
 
-// Use keyboard accessibility
+// Theme Management
+const enableDarkMode = () => {
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('theme', 'dark');
+};
+
+const disableDarkMode = () => {
+    document.body.classList.remove('dark-mode');
+    localStorage.setItem('theme', 'light');
+};
+
+// Check for saved theme preference or system preference
+const savedTheme = localStorage.getItem('theme');
+const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (savedTheme === 'dark' || (!savedTheme && systemDarkMode)) {
+    enableDarkMode();
+}
+
+themeToggle.addEventListener('click', () => {
+    calculator.vibrate();
+    if (document.body.classList.contains('dark-mode')) {
+        disableDarkMode();
+    } else {
+        enableDarkMode();
+    }
+});
+
+// Prevent pull-to-refresh
+document.body.style.overscrollBehaviorY = 'contain';
+
+// Keyboard accessibility
 window.addEventListener('keydown', e => {
     if ((e.key >= 0 && e.key <= 9) || e.key === '.') calculator.appendNumber(e.key);
     if (e.key === 'Enter' || e.key === '=') calculator.compute();

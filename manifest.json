@@ -1,11 +1,11 @@
 {
   "name": "Modern Calculator",
   "short_name": "Calculator",
-  "description": "Simple and modern calculator app for learning GitHub.",
+  "description": "Alat hitung modern yang elegan dan responsif untuk kebutuhan sehari-hari.",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "theme_color": "#3b82f6",
   "orientation": "portrait-primary",
   "icons": [
     {

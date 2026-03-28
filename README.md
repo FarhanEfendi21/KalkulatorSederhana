@@ -1,55 +1,32 @@
-# 🧮 Modern Calculator - Belajar GitHub
+# 🧮 Modern Calculator PWA
 
-Halo! Ini adalah proyek kalkulator sederhana yang dibuat khusus untuk membantu kamu belajar alur kerja **GitHub**. Kalkulator ini memiliki desain modern dengan efek *glassmorphism* dan sudah mendukung *keyboard accessibility*.
+Aplikasi kalkulator modern dengan desain minimalis, responsif, dan mendukung fitur PWA (*Progressive Web App*). Didesain untuk memberikan pengalaman menghitung yang cepat, indah, dan efisien langsung dari browser atau perangkat Anda.
 
-## ✨ Fitur
-- `index.html`: Kerangka utama kalkulator.
-- `about.html`: Halaman informasi tambahan.
-- `history.html`: Halaman riwayat perhitungan (File Baru).
-- `style.css`: Desain Modern Glassmorphism.
-- `script.js`: Logika perhitungan & penyimpanan data.
+## ✨ Fitur Unggulan
 
-## 🚀 Cara Menjalankan di Lokal
-1. Download atau clone repository ini.
-2. Buka file `index.html` di browser kesayangan kamu.
+- 📱 **PWA Ready**: Instal aplikasi langsung ke layar utama ponsel atau desktop Anda.
+- 🌙 **Mode Gelap & Terang**: Mendukung preferensi sistem dan toggle manual dengan animasi halus.
+- 🕒 **Riwayat Perhitungan**: Menyimpan 10 perhitungan terakhir Anda di penyimpanan lokal.
+- ⌨️ **Aksesibilitas Keyboard**: Dapat dioperasikan sepenuhnya menggunakan keyboard.
+- 📳 **Haptic Feedback**: Getaran halus saat tombol ditekan (pada perangkat yang mendukung).
+- 🎨 **Desain Minimalis**: Menggunakan tipografi modern dan bayangan lembut untuk estetika maksimal.
 
----
+## 🚀 Teknologi yang Digunakan
 
-## 📖 Panduan Belajar GitHub
+- **HTML5**: Struktur semantik untuk aksesibilitas yang lebih baik.
+- **CSS3**: Variabel CSS untuk tema, Grid/Flexbox untuk tata letak, dan animasi halus.
+- **Vanilla JavaScript**: Logika perhitungan dan manajemen state tanpa library eksternal.
+- **Service Workers**: Untuk kemampuan offline dan caching aset.
 
-Gunakan langkah-langkah di bawah ini untuk mengunggah proyek ini ke GitHub kamu sendiri!
+## 🛠️ Instalasi Lokal
 
-### 1. Inisialisasi Git
-Buka terminal (atau PowerShell) di folder ini, lalu jalankan:
-```bash
-git init
-```
+1. Clone repositori ini ke komputer Anda.
+2. Buka file `index.html` di browser pilihan Anda.
+3. Untuk fitur PWA, pastikan Anda menjalankannya melalui server lokal (seperti Live Server di VS Code).
 
-### 2. Tambahkan File ke Staging
-```bash
-git add .
-```
+## 📄 Lisensi
 
-### 3. Commit Pertama Kamu
-```bash
-git commit -m "feat: inisialisasi proyek kalkulator modern"
-```
-
-### 4. Hubungkan ke Repository GitHub
-1. Buat repository baru di [github.com/new](https://github.com/new) dengan nama `belajar-github-kalkulator`.
-2. Salin link repository kamu (contoh: `https://github.com/username/belajar-github-kalkulator.git`).
-3. Jalankan perintah ini (ganti URL dengan milikmu):
-```bash
-git remote add origin https://github.com/username/belajar-github-kalkulator.git
-git branch -M main
-git push -u origin main
-```
-
-### 5. Aktifkan Live Demo (GitHub Pages)
-1. Pergi ke tab **Settings** di repository GitHub kamu.
-2. Pilih menu **Pages** di sebelah kiri.
-3. Di bagian **Branch**, pilih `main` dan folder `/(root)`, lalu klik **Save**.
-4. Tunggu beberapa menit, dan kalkulator kamu akan online secara gratis!
+Proyek ini bersifat open-source dan bebas digunakan untuk tujuan belajar maupun pengembangan lebih lanjut.
 
 ---
-Dibuat dengan ❤️ untuk membantu perjalanan belajarmu di dunia pemrograman!
+Didesain dengan ❤️ untuk produktivitas Anda.

@@ -13,9 +13,9 @@
     
     <!-- PWA Settings -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#3b82f6">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Calculator">
     <link rel="apple-touch-icon" href="icon-512.png">
 
@@ -36,26 +36,34 @@
         }
 
         .about-content h2 {
-            margin-bottom: 1rem;
-            color: var(--primary);
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .back-link {
             display: inline-block;
             margin-top: 2rem;
             padding: 0.75rem 1.5rem;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
+            background: var(--button-bg);
+            color: var(--text-primary);
             text-decoration: none;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
             transition: all 0.3s ease;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow-soft);
+            font-weight: 600;
         }
 
         .back-link:hover {
-            background: var(--primary);
-            color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -64,28 +72,33 @@
     <div class="background-glow"></div>
     <main class="calculator-container">
         <header>
-            <h1>About This Project</h1>
-            <p>Exploring Git & GitHub</p>
+            <div class="header-text">
+                <h1>Tentang Aplikasi</h1>
+                <p>Alat hitung modern dan cerdas</p>
+            </div>
         </header>
 
         <section class="calculator-glass">
             <nav class="main-nav">
-                <a href="index.html" class="nav-link">Calculator</a>
+                <a href="index.html" class="nav-link">Kalkulator</a>
                 <a href="history.html" class="nav-link">Riwayat</a>
             </nav>
             <div class="about-content">
-                <h2>Apa ini?</h2>
-                <p>Proyek ini adalah alat bantu belajar bagi pemula yang ingin memahami bagaimana Git bekerja dengan
-                    proyek yang memiliki banyak file.</p>
-                <br>
-                <h2>Teknologi</h2>
-                <p>Dibuat menggunakan HTML5, CSS3, dan Vanilla JavaScript. Tanpa library eksternal agar kode tetap
-                    bersih dan mudah dipelajari.</p>
+                <h2>Apa itu Modern Calculator?</h2>
+                <p>Aplikasi ini adalah alat hitung minimalis yang dirancang untuk memberikan pengalaman pengguna yang bersih dan efisien. Fokus utama kami adalah pada estetika dan kemudahan penggunaan.</p>
+                
+                <h2>Fitur Utama</h2>
+                <p>• <strong>PWA Ready:</strong> Dapat diinstal langsung ke perangkat Anda dan diakses secara offline.<br>
+                   • <strong>Mode Gelap & Terang:</strong> Transisi yang halus untuk kenyamanan mata Anda.<br>
+                   • <strong>Riwayat Perhitungan:</strong> Menyimpan 10 perhitungan terakhir Anda secara otomatis.<br>
+                   • <strong>Desain Responsif:</strong> Tampilan yang indah di semua perangkat, dari ponsel hingga desktop.</p>
+                
+                <a href="index.html" class="back-link">Kembali Menghitung</a>
             </div>
         </section>
 
         <footer>
-            <p>Keep committing! 💻</p>
+            <p>Didesain untuk kesederhanaan ⚖️</p>
         </footer>
     </main>
 </body>
