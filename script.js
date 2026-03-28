@@ -57,9 +57,21 @@ class Calculator {
             default:
                 return;
         }
+        const expression = `${this.getDisplayNumber(prev)} ${this.operation} ${this.getDisplayNumber(current)}`;
         this.currentOperand = computation;
         this.operation = undefined;
         this.previousOperand = '';
+
+        // Save to history
+        this.saveToHistory(expression, this.getDisplayNumber(computation));
+    }
+
+    saveToHistory(expression, result) {
+        const history = JSON.parse(localStorage.getItem('calc_history') || '[]');
+        history.push({ expression, result });
+        // Keep only last 10
+        if (history.length > 10) history.shift();
+        localStorage.setItem('calc_history', JSON.stringify(history));
     }
 
     getDisplayNumber(number) {

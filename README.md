@@ -4,9 +4,10 @@ Halo! Ini adalah proyek kalkulator sederhana yang dibuat khusus untuk membantu k
 
 ## ✨ Fitur
 - `index.html`: Kerangka utama kalkulator.
-- `about.html`: Halaman informasi tambahan untuk belajar navigasi antar halaman.
+- `about.html`: Halaman informasi tambahan.
+- `history.html`: Halaman riwayat perhitungan (File Baru).
 - `style.css`: Desain Modern Glassmorphism.
-- `script.js`: Logika perhitungan.
+- `script.js`: Logika perhitungan & penyimpanan data.
 
 ## 🚀 Cara Menjalankan di Lokal
 1. Download atau clone repository ini.

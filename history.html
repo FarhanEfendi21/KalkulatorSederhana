@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation History - Modern Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .history-list {
+            list-style: none;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            padding-right: 0.5rem;
+        }
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .history-expr {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .history-res {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .clear-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            background: rgba(236, 72, 153, 0.1);
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        .clear-btn:hover {
+            background: rgba(236, 72, 153, 0.2);
+        }
+        .empty-state {
+            text-align: center;
+            color: var(--text-dim);
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-glow"></div>
+    <main class="calculator-container">
+        <header>
+            <h1>History</h1>
+            <p>Your recent calculations</p>
+        </header>
+
+        <section class="calculator-glass">
+            <nav style="margin-bottom: 1.5rem; display: flex; justify-content: space-between;">
+                <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">← Calculator</a>
+                <a href="about.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">About →</a>
+            </nav>
+
+            <div id="history-container" class="history-list">
+                <!-- History items will be injected here -->
+            </div>
+
+            <button id="clear-history" class="clear-btn">Clear History</button>
+        </section>
+
+        <footer>
+            <p>Data stored in your browser 🌐</p>
+        </footer>
+    </main>
+
+    <script>
+        const historyContainer = document.getElementById('history-container');
+        const clearBtn = document.getElementById('clear-history');
+
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('calc_history') || '[]');
+            historyContainer.innerHTML = '';
+
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<div class="empty-state">No history yet. Start calculating!</div>';
+                clearBtn.style.display = 'none';
+                return;
+            }
+
+            clearBtn.style.display = 'block';
+            history.reverse().forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `
+                    <span class="history-expr">${item.expression}</span>
+                    <span class="history-res">${item.result}</span>
+                `;
+                historyContainer.appendChild(div);
+            });
+        }
+
+        clearBtn.addEventListener('click', () => {
+            localStorage.removeItem('calc_history');
+            loadHistory();
+        });
+
+        loadHistory();
+    </script>
+</body>
+</html>
