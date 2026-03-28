@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator - Belajar GitHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <main class="calculator-container">
+        <header>
+            <h1>Calculator</h1>
+            <p>Simple tools for learning GitHub</p>
+        </header>
+
+        <section class="calculator-glass">
+            <div class="display">
+                <div id="previous-operand" class="previous-operand"></div>
+                <div id="current-operand" class="current-operand">0</div>
+            </div>
+            <div class="buttons">
+                <button data-all-clear class="span-two control">AC</button>
+                <button data-delete class="control">DEL</button>
+                <button data-operation class="operator">÷</button>
+                
+                <button data-number>7</button>
+                <button data-number>8</button>
+                <button data-number>9</button>
+                <button data-operation class="operator">×</button>
+                
+                <button data-number>4</button>
+                <button data-number>5</button>
+                <button data-number>6</button>
+                <button data-operation class="operator">+</button>
+                
+                <button data-number>1</button>
+                <button data-number>2</button>
+                <button data-number>3</button>
+                <button data-operation class="operator">−</button>
+                
+                <button data-number class="span-two">0</button>
+                <button data-number>.</button>
+                <button data-equals class="operator-equal">=</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>Ready to push to GitHub? 🚀</p>
+        </footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
