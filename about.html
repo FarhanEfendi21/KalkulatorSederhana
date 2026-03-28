@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Modern Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .about-content {
+            text-align: left;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+        .about-content h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .back-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-glow"></div>
+    <main class="calculator-container">
+        <header>
+            <h1>About This Project</h1>
+            <p>Exploring Git & GitHub</p>
+        </header>
+
+        <section class="calculator-glass">
+            <div class="about-content">
+                <h2>Apa ini?</h2>
+                <p>Proyek ini adalah alat bantu belajar bagi pemula yang ingin memahami bagaimana Git bekerja dengan proyek yang memiliki banyak file.</p>
+                <br>
+                <h2>Teknologi</h2>
+                <p>Dibuat menggunakan HTML5, CSS3, dan Vanilla JavaScript. Tanpa library eksternal agar kode tetap bersih dan mudah dipelajari.</p>
+                <br>
+                <h2>Kenapa Banyak File?</h2>
+                <p>Dengan adanya lebih dari satu file HTML, kamu bisa belajar cara melakukan <strong>commit</strong> yang melibatkan banyak file sekaligus di GitHub!</p>
+            </div>
+            
+            <a href="index.html" class="back-link">← Kembali ke Kalkulator</a>
+        </section>
+
+        <footer>
+            <p>Keep committing! 💻</p>
+        </footer>
+    </main>
+</body>
+</html>

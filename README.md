@@ -3,11 +3,10 @@
 Halo! Ini adalah proyek kalkulator sederhana yang dibuat khusus untuk membantu kamu belajar alur kerja **GitHub**. Kalkulator ini memiliki desain modern dengan efek *glassmorphism* dan sudah mendukung *keyboard accessibility*.
 
 ## ✨ Fitur
-- Operasi matematika dasar (+, -, ×, ÷).
-- Desain Glassmorphism yang premium dan responsif.
-- Animasi latar belakang yang halus.
-- Mendukung Input dari Keyboard.
-- Mudah di-deploy ke GitHub Pages.
+- `index.html`: Kerangka utama kalkulator.
+- `about.html`: Halaman informasi tambahan untuk belajar navigasi antar halaman.
+- `style.css`: Desain Modern Glassmorphism.
+- `script.js`: Logika perhitungan.
 
 ## 🚀 Cara Menjalankan di Lokal
 1. Download atau clone repository ini.
