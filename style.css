@@ -81,7 +81,7 @@ header p {
 .nav-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 600;
     transition: color 0.2s;
 }
@@ -183,7 +183,8 @@ footer {
     body {
         padding: 0;
         align-items: flex-start;
-        display: block; /* Let it scroll naturally */
+        display: block;
+        /* Let it scroll naturally */
     }
 
     .calculator-container {
@@ -238,7 +239,8 @@ footer {
     }
 
     /* History & About adjustments for full screen mobile */
-    .about-content, .history-list {
+    .about-content,
+    .history-list {
         padding: 0 1rem;
     }
 
